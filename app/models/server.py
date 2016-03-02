@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import json
-import os
+import subprocess
 from flask import request
 from flask_restful import Resource
 
@@ -64,14 +64,14 @@ class run_exo(Resource):
       hpo_terms = "HP:0000001"    
     
     #Exomiser run and return of html output
-    os.system("java -jar /home/tasos/Downloads/exomiser-cli-7.2.1/exomiser-cli-7.2.1.jar --prioritiser=" + prior + " -I " + inh + " --hpo-ids " + hpo_terms + " -v" + vcf_file)
-    os.system("cp results/" + vcf_file +"-exomiser-results.html /home/tasos/Desktop/rd-connect-client/temp/rd-connect-local-client-0.7.1/local/public/")
+    subprocess.call("java -jar /home/tasos/Downloads/exomiser-cli-7.2.1/exomiser-cli-7.2.1.jar --prioritiser=" + prior + " -I " + inh + " --hpo-ids " + hpo_terms + " -v" + vcf_file, shell=True)
+    subprocess.call("cp results/" + vcf_file +"-exomiser-results.html /home/tasos/Desktop/rd-connect-client/temp/rd-connect-local-client-0.7.1/local/public/", shell=True)
 
-    os.system("rm " + vcf_file)
-    os.system("rm " + json_file)
+    subprocess.call("rm " + vcf_file, shell=True)
+    subprocess.call("rm " + json_file, shell=True)
+    subprocess.call("rm results/" +  vcf_file + "-exomiser-results.html", shell=True)
     
-    return {"file" : vcf_file + "-exomiser-results.html",
-            "hpo" : hpo_terms}
+    return {"file" : vcf_file + "-exomiser-results.html"}
 
     
     #os.system("cp results/sample.vcf-exomiser-results.html templates/")

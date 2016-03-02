@@ -9,6 +9,10 @@ setup(
         "Flask-Cors == 2.1.2",
         "tornado == 4.3",
         "requests == 2.9.1",
+        "gunicorn ==19.4.5",
+        "gevent == 1.1rc5",
+
+
     ],
     # ...
 )
