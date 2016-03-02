@@ -11,8 +11,8 @@ It stores the results in the "results" folder and renders the HTML Exomiser outp
 ```
 #Run with the default server of Flask
 ./api.py 
-#Run with the gunicorn server
-./gunicorn.py
+#Run with the tornado server
+./torn.py
 
 ```
 
