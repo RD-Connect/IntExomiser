@@ -6,8 +6,6 @@
 ./develop.sh              #Create a virtual environment and install all dependencies there
 source venv/bin/activate  #Enter the virtualenv
 ./gunicorn.py             #Start the server
-
-
 ```
 
 ## Utility
