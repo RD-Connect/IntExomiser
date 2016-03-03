@@ -10,7 +10,7 @@ source venv/bin/activate  #Enter the virtualenv
 
 ```
 
-## Run Exomiser
+## Utility
 
 The client from the genomics platform sends a vcf file together with a json file for a specific donor that queries from the Phenotips database.Parameters like Exomiser algorithm and mode of inheritance are also sent to the service.
 The Exomiser web service receives the two files,parses the json in order to get the HPO terms and runs
