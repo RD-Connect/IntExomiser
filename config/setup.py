@@ -7,7 +7,6 @@ setup(
         "flask==0.10.1",
         "flask-restful==0.3.5",
         "Flask-Cors == 2.1.2",
-        "tornado == 4.3",
         "requests == 2.9.1",
         "gunicorn ==19.4.5",
         "gevent == 1.1rc5",
