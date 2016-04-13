@@ -1,22 +1,25 @@
 #!/usr/bin/env python
 import requests,json
+import subprocess
 
 #Query the Phenotips Api in order to get the json with the information of the specific patient
-phenotips = 'http://localhost:8081/phenotips/ExportPatient?id=donor001'
+phenotips = 'http://localhost:8081/phenotips/ExportPatient?id=P0000002'
 
-url1 = 'http://localhost:8082/exomiser/json/json1' 
-url2 = 'http://localhost:8082/exomiser/vcf/sample1'
-url3 = 'http://localhost:8082/exomiser/exomiser?json=json1&vcf=sample1'
+json = requests.get(phenotips)
+vcf  = open('/home/tasos/Downloads/null_E000010_1460542983123.vcf', 'rb')
 
-headers = {'Content-Type' : 'application/json'}
+#Endpoint of Exomiser service
+url = 'http://localhost:8082/exomiser?prioritiser=PHENIX_PRIORITY&inheritance=AUTOSOMAL_DOMINANT'
+headers = {'Content-Type' : 'application/text'}
 
-patient = requests.get(phenotips)
+multiple_files = [('files', ('sample.vcf', vcf,  'file/vcf')),
+                  ('files', ('donor.json', json.text, 'file/json'))
+                 ]
 
-#print patient.text
+r1 = requests.post(url, files = multiple_files)
 
-#r1 = requests.post(url1, data=open('/home/tasos/Desktop/Exomiser_Api/phenotips2.json', 'rb'))
-r1 = requests.post(url1, data=patient.text)
-r2 = requests.post(url2, data=open('/home/tasos/Desktop/Exomiser_Api/Pfeiffer.vcf', 'rb'))
+print r1.text
 
-g=requests.get(url3)
+#g=requests.get(url)
+
 
