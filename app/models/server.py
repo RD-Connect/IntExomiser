@@ -3,10 +3,13 @@ import json
 import subprocess
 from flask import request
 from flask_restful import Resource
+from flask.ext.cas import login_required
+
 
 class run_exo(Resource):
  
   #POST method where the vcf and the json file are sent simultaneously and consequentlty Exomiser is running
+  #@login_required
   def post(self):
     
     '''Get the 2 files from the genomics platform and save them locally at server'''
@@ -56,9 +59,11 @@ class run_exo(Resource):
     
     if "features" in data:
       for i in range(len(data["features"])):
-         hpo += data["features"][i]["id"]+","
+         if data["features"][i]["id"][0:2] == "HP":
+            hpo += data["features"][i]["id"]+","
 
       hpo_terms=hpo[:-1]
+
 
     else:
       hpo_terms = "HP:0000001"    
@@ -72,13 +77,5 @@ class run_exo(Resource):
     subprocess.call("rm results/" +  vcf_file + "-exomiser-results.html", shell=True)
     
     return {"file" : vcf_file + "-exomiser-results.html"}
-
-    
-    #os.system("cp results/sample.vcf-exomiser-results.html templates/")
-   
-    #return "Exomiser finished"
-    #return send_from_directory('html', "results/sample.vcf-exomiser-results.html")
-    #return make_response(render_template("sample.vcf-exomiser-results.html"),200,headers)
-    #return render_template("sample.vcf-exomiser-results.html")
 
     

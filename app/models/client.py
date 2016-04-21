@@ -22,4 +22,3 @@ print r1.text
 
 #g=requests.get(url)
 
-
