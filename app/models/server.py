@@ -105,7 +105,7 @@ class run_exo(Resource):
 
 
     output = config['outputOptions']
-    output['outputPrefix']= '/home/tasos/Desktop/Exomiser_Api/results/' + vcf_base + '-exomiser-results'
+    output['outputPrefix']= 'results/' + vcf_base + '-exomiser-results'
 
     if prioritiser == "PHENIX_PRIORITY":
       del analysis['steps'][-3]
